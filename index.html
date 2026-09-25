@@ -508,8 +508,53 @@ a{color:inherit}
   .bat{display:none}
 }
 
+
+/* =====================================================================
+   FAQ
+   ===================================================================== */
+.faq{padding:112px 0;background:var(--lit-paper);border-top:1px solid var(--line)}
+.faq-grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:clamp(40px,7vw,110px);align-items:start}
+.faq-side{position:sticky;top:120px}
+.faq-side .lede{margin-top:18px}
+.faq-side .btn{margin-top:28px}
+.qa{border-top:1px solid var(--line-2)}
+.qa:last-child{border-bottom:1px solid var(--line-2)}
+.qa summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;cursor:pointer;font:500 21px/1.35 var(--serif);color:var(--ink)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary i{position:relative;width:30px;height:30px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px var(--line-2);transition:background .4s var(--ease),box-shadow .4s var(--ease)}
+.qa summary i::before,.qa summary i::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.6px;margin:-.8px 0 0 -5.5px;background:var(--ink);border-radius:2px;transition:transform .45s var(--ease)}
+.qa summary i::after{transform:rotate(90deg)}
+.qa[open] summary i{background:var(--teal);box-shadow:none}
+.qa[open] summary i::after{transform:rotate(0)}
+@media (hover:hover){.qa summary:hover i{box-shadow:inset 0 0 0 1px var(--teal-text)}}
+.qa .ans{padding:0 56px 24px 0;font-size:16.5px;line-height:1.65;color:var(--body)}
+.qa .ans b{color:var(--ink);font-weight:600}
+
+/* press quote in host */
+.press-quote{margin:28px 0 0;max-width:600px;padding:20px 22px;border-radius:var(--r);background:#fff;box-shadow:var(--shadow-card),inset 0 0 0 1px rgba(18,19,39,.05);display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start}
+.press-quote .tv{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--navy);color:#fff}
+.press-quote .tv svg{width:20px;height:20px}
+.press-quote p{margin:0;font:500 italic 18px/1.45 var(--serif);color:var(--ink)}
+.press-quote span{display:block;margin-top:8px;font-size:13.5px;color:var(--muted)}
+
+/* success extras */
+.after{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.ghost-btn{display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:#fff;font:600 14.5px/1 var(--sans);color:var(--ink);text-decoration:none;cursor:pointer;transition:border-color .3s var(--ease),background .3s var(--ease)}
+@media (hover:hover){.ghost-btn:hover{border-color:var(--teal-text);background:#f4fbfb}}
+.linkish{display:block;margin:16px auto 0;padding:10px;border:0;background:none;font:500 14px/1 var(--sans);color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+@media (max-width:900px){
+  .faq{padding:84px 0}
+  .faq-grid{grid-template-columns:minmax(0,1fr)}
+  .faq-side{position:static}
+}
+@media (max-width:600px){
+  .qa summary{font-size:18.5px;padding:20px 0}
+  .qa .ans{padding-right:0}
+  .press-quote{padding:16px}
+}
+
 /* Playfair defaults to old-style figures ("2oK"); the font shorthand resets this, so restate it last */
-.h1,.h1 *,.h2,.h2 *,.wordmark b,.wordmark b *,.li .n,.li h3,.stat .v,.date-card b,.sheet h2,.sheet h2 *,.done h3,.done h3 *,.print .quote p,.player .cap b,.host-copy .sub,.qcol h3,.portrait .press b{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+.h1,.h1 *,.h2,.h2 *,.wordmark b,.wordmark b *,.li .n,.li h3,.stat .v,.date-card b,.sheet h2,.sheet h2 *,.done h3,.done h3 *,.print .quote p,.player .cap b,.host-copy .sub,.qcol h3,.portrait .press b,.qa summary,.press-quote p{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
 .lede,.qual-head .lede{text-wrap:pretty}
 @media (max-width:600px){.pbtn small{display:none}.player .cap b{font-size:17px}.player .play{padding:0 16px 18px}}
 @media (prefers-reduced-motion:reduce){
@@ -693,6 +738,10 @@ a{color:inherit}
           <div class="stat"><span class="v">First 6</span><span class="l">One of the first five or six to buy it</span></div>
           <div class="stat"><span class="v">$20K</span><span class="l">Days run, a number of times over</span></div>
         </div>
+        <figure class="press-quote rv" style="--d:7">
+          <span class="tv" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6.5" width="18" height="12.5" rx="2.5"/><path d="m8.5 3 3.5 3.5L15.5 3"/></svg></span>
+          <div><p>&ldquo;It's an amazing technology for people with orthopedic issues. For folks who want to avoid drugs, and surgeries.&rdquo;</p><span>Dr. Jeff Finnigan on Central Oregon Daily News</span></div>
+        </figure>
       </div>
     </div>
   </div>
@@ -722,6 +771,28 @@ a{color:inherit}
           <li><span class="nn">02</span><span>You're looking for a hard-sell script</span></li>
           <li><span class="nn">03</span><span>You don't offer StemWave yet. This training starts from a device you already run</span></li>
         </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="faq-grid">
+      <div class="faq-side">
+        <h2 class="h2 rv" id="faq-h">Frequently Asked Questions</h2>
+        <p class="lede rv" style="--d:1">Everything you need before Halloween morning. Still unsure? Grab a seat anyway. It's free.</p>
+        <button class="btn rv" style="--d:2" type="button" data-reserve>Reserve My Spot<span class="ic" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></button>
+      </div>
+      <div class="qas rv" style="--d:1">
+        <details class="qa" open><summary>Is it really free?<i aria-hidden="true"></i></summary><div class="ans">Yes. <b>No charge and no pressure.</b> It's a 40-minute training, not a sales webinar.</div></details>
+        <details class="qa"><summary>What time is it where I am?<i aria-hidden="true"></i></summary><div class="ans"><b data-date-medium>Saturday, October 31</b> at 7:30 AM Pacific / 10:30 AM Eastern<span data-local-time></span>. Add it to your calendar right after you register.</div></details>
+        <details class="qa"><summary>How long does it run?<i aria-hidden="true"></i></summary><div class="ans">40 minutes, with time for Jeff to answer questions.</div></details>
+        <details class="qa"><summary>Where does it happen?<i aria-hidden="true"></i></summary><div class="ans">Live on Zoom. Your link goes to the email you register with, so use the one you check.</div></details>
+        <details class="qa"><summary>Who is this for?<i aria-hidden="true"></i></summary><div class="ans">Active StemWave providers who want more from the device they already own. If you don't offer StemWave yet, this training isn't built for you.</div></details>
+        <details class="qa"><summary>Why only 40 seats?<i aria-hidden="true"></i></summary><div class="ans">Jeff wants to actually talk with you and answer your questions, so the room stops at 40 doctors.</div></details>
+        <details class="qa"><summary>Why do you need my cell number?<i aria-hidden="true"></i></summary><div class="ans">So you can get training reminders on your phone. <b>We won't call you.</b></div></details>
       </div>
     </div>
   </div>
@@ -803,7 +874,8 @@ var EVENT = {
   startISO: '2026-10-31T07:30:00-07:00', // 7:30 AM Pacific (PDT) = 10:30 AM Eastern (EDT)
   minutes: 40
 };
-var FORM_ENDPOINT = '';   // GHL webhook or form URL. Empty = preview mode, nothing is sent.
+var FORM_ENDPOINT = 'https://services.leadconnectorhq.com/hooks/TxpqBRWLfyNdw7GglVNI/webhook-trigger/8e5ed83c-152f-4ba5-afa3-a4ec58ddee45';
+// GHL inbound webhook. Set to '' for preview mode (nothing is sent). Add ?preview=1 to the URL to test without sending.
 var VIMEO = { id: '1226772677', h: '23d58c2a67' };
 var PUMPKIN = '<svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fill="none" stroke="#4d5a26" stroke-width="3" stroke-linecap="round"/><ellipse cx="14.5" cy="28" rx="10" ry="14" fill="#c9661d"/><ellipse cx="33.5" cy="28" rx="10" ry="14" fill="#c9661d"/><ellipse cx="24" cy="28" rx="11" ry="15" fill="#e28131"/><ellipse cx="19" cy="28" rx="5.5" ry="14" fill="none" stroke="#c9661d" stroke-width="1.2" opacity=".7"/><ellipse cx="29" cy="28" rx="5.5" ry="14" fill="none" stroke="#c9661d" stroke-width="1.2" opacity=".7"/><g fill="#ffd36b"><path d="M13.5 24.5 18 20l2 5.5z"/><path d="M34.5 24.5 30 20l-2 5.5z"/><path d="M22.2 28.6 24 25.8l1.8 2.8z"/><path d="M12.8 31.5c3.3 4.6 8 6.8 11.2 6.8s7.9-2.2 11.2-6.8l-3.4 1.4-1.3 2.4-2.3-1.6-2.1 2.3-2.1-2.3-2.3 1.6-1.3-2.4z"/></g></svg>';
 
@@ -843,7 +915,7 @@ var PUMPKIN = '<svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fi
       var mineBare = fmt(tz);
       if (mineBare === fmt('America/Los_Angeles') || mineBare === fmt('America/New_York')) return;
       var mine = start.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit', timeZoneName:'short' });
-      document.querySelectorAll('[data-local-time]').forEach(function(n){ n.textContent = '. That’s ' + mine + ' where you are.'; });
+      document.querySelectorAll('[data-local-time]').forEach(function(n){ n.textContent = '. That’s ' + mine + ' where you are'; });
       document.querySelectorAll('[data-time-sub]').forEach(function(n){ n.textContent = '10:30 AM Eastern, ' + mine + ' for you'; });
     } catch(e){}
   })();
@@ -931,7 +1003,23 @@ var PUMPKIN = '<svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fi
   var done = dlg.querySelector('.done');
   var bar = dlg.querySelector('.bar i');
   var STORE = 'sw20k_registration';
+  var params = new URLSearchParams(location.search);
+  var ATTR = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid','ref'];
+  /* prefill from an email link: ?first_name=&last_name=&name=&email=&phone= */
+  (function(){
+    var nm = params.get('name') || [params.get('first_name'), params.get('last_name')].filter(Boolean).join(' ');
+    if (nm) form.name.value = nm;
+    if (params.get('email')) form.email.value = params.get('email');
+    if (params.get('phone')) form.phone.value = fmtPhone(params.get('phone'));
+  })();
   function focusables(){ return [].slice.call(dlg.querySelectorAll('button, input:not([name=zz_fax_x])')).filter(function(n){ return n.offsetParent !== null; }); }
+  /* a returning registrant opens straight to their confirmation */
+  (function(){
+    try {
+      var prev = JSON.parse(localStorage.getItem(STORE) || 'null');
+      if (prev && prev.event_start === EVENT.startISO && prev.email && !params.get('email')) success(prev, false, true);
+    } catch(e){}
+  })();
   function openDlg(){
     lastFocus = document.activeElement;
     dlg.hidden = false;
@@ -1008,29 +1096,36 @@ var PUMPKIN = '<svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fi
     var payload = {
       first_name: parts[0], last_name: parts.slice(1).join(' '), full_name: full,
       email: form.email.value.trim(), phone: '+1' + tenDigits(form.phone.value),
-      source: '20kday-halloween-training', event_start: EVENT.startISO,
-      flagged: form.zz_fax_x.value ? 'honeypot' : '', submitted_at: new Date().toISOString()
+      source: '20kday-halloween-training', event_name: "Let's Build a $20K StemWave Day",
+      event_start: EVENT.startISO, event_time: '7:30 AM Pacific / 10:30 AM Eastern, ' + medium,
+      visitor_timezone: (function(){ try { return Intl.DateTimeFormat().resolvedOptions().timeZone; } catch(e){ return ''; } })(),
+      page_url: location.href.split('#')[0], flagged: form.zz_fax_x.value ? 'honeypot' : '', submitted_at: new Date().toISOString()
     };
-    try { localStorage.setItem(STORE, JSON.stringify(payload)); } catch(err){}
+    ATTR.forEach(function(k){ if (params.get(k)) payload[k] = params.get(k); });
+    payload.summary = full + ' <' + payload.email + '> ' + payload.phone + ' registered for ' + payload.event_name + ' (' + payload.event_time + ')' + (payload.utm_source ? ' via ' + payload.utm_source : '');
+    Object.keys(payload).forEach(function(k){ if (payload[k] === '' || payload[k] == null) delete payload[k]; });
+    try { localStorage.setItem(STORE + '_draft', JSON.stringify(payload)); } catch(err){}  /* only a confirmed send becomes STORE */
     btn.disabled = true;
     var label = btn.firstChild; label.nodeValue = 'Reserving';
-    if (!FORM_ENDPOINT) { setTimeout(function(){ success(payload, true); }, 600); return; }
+    if (!FORM_ENDPOINT || params.get('preview') === '1') { setTimeout(function(){ success(payload, true); }, 600); return; }
     fetch(FORM_ENDPOINT, { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(payload) })
-      .then(function(r){ return r.text().then(function(t){ if (!r.ok || /error/i.test(t)) throw new Error(t || r.status); }); })
+      .then(function(r){ return r.text().then(function(t){ if (!r.ok || /error/i.test(t)) throw new Error(t || r.status); }); }) /* GHL answers 200 with an Error string when it rejects a body */
       .then(function(){ success(payload, false); })
       .catch(function(){
         btn.disabled = false; label.nodeValue = 'Try Again';
         var n = form.querySelector('.formnote') || document.createElement('p');
         n.className = 'formnote'; n.textContent = "That didn't go through. Your details are saved on this device, so tap Try Again.";
+        try { localStorage.setItem(STORE + '_failed', JSON.stringify(payload)); } catch(err){}
         form.appendChild(n);
       });
   });
 
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
-  function success(p, preview){
+  function success(p, preview, returning){
+    if (!returning) { try { localStorage.setItem(STORE, JSON.stringify(p)); localStorage.removeItem(STORE + '_draft'); localStorage.removeItem(STORE + '_failed'); } catch(e){} }
     done.innerHTML =
       '<span class="ok pk-ok" aria-hidden="true">' + PUMPKIN + '</span>' +
-      '<h3>You’re in, <em>' + esc(p.first_name) + '.</em></h3>' +
+      '<h3>' + (returning ? 'You’re already in, ' : 'You’re in, ') + '<em>' + esc(p.first_name) + '.</em></h3>' +
       '<p>Your Zoom link is on its way to your inbox. See you Halloween morning, ' + esc(medium) + ' at 7:30 AM Pacific / 10:30 AM Eastern.</p>' +
       '<div class="echo">' +
         '<div><span>Name</span><b>' + esc(p.full_name) + '</b></div>' +
@@ -1038,14 +1133,43 @@ var PUMPKIN = '<svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fi
         '<div><span>Cell</span><b>' + esc(fmtPhone(p.phone.slice(2))) + '</b></div>' +
       '</div>' +
       '<button class="btn block" type="button" data-ics>Add To Calendar<span class="ic" aria-hidden="true"><svg><use href="#i-cal"/></svg></span></button>' +
-      (preview ? '<p class="preview-flag">Preview mode: nothing was sent. Set FORM_ENDPOINT to go live.</p>' : '');
+      '<div class="after">' +
+        '<a class="ghost-btn" href="' + gcalUrl() + '" target="_blank" rel="noopener">Google Calendar</a>' +
+        '<button class="ghost-btn" type="button" data-share>Invite A Colleague</button>' +
+      '</div>' +
+      '<button class="linkish" type="button" data-again>Registering someone else?</button>' +
+      (preview ? '<p class="preview-flag">Preview mode: nothing was sent.</p>' : '');
     form.hidden = true; done.hidden = false;
     bar.style.transform = 'scaleX(1)';
     dlg.querySelector('.top h2').innerHTML = 'Your seat is <em>saved</em>';
     done.querySelector('[data-ics]').addEventListener('click', ics);
-    done.style.outline = 'none'; done.focus({ preventScroll:true });
+    done.querySelector('[data-share]').addEventListener('click', share);
+    done.querySelector('[data-again]').addEventListener('click', again);
+    if (!returning) { done.style.outline = 'none'; done.focus({ preventScroll:true }); }
   }
 
+  function gcalUrl(){
+    var e = new Date(start.getTime() + EVENT.minutes * 60000);
+    function z(t){ return t.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''); }
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent("Let's Build a $20K StemWave Day (Dr. Jeff Finnigan)") +
+      '&dates=' + z(start) + '/' + z(e) + '&details=' + encodeURIComponent('Free 40-minute live training on Zoom. Your Zoom link is in your confirmation email.');
+  }
+  function share(ev){
+    var url = location.href.split(/[?#]/)[0];
+    var b = ev.currentTarget;
+    var data = { title: "Let's Build a $20K StemWave Day", text: 'Free 40-minute training for StemWave providers with Dr. Jeff Finnigan, Halloween morning on Zoom. Only 40 seats.', url: url };
+    if (navigator.share) { navigator.share(data).catch(function(){}); return; }
+    var done2 = function(){ b.textContent = 'Link Copied'; setTimeout(function(){ b.textContent = 'Invite A Colleague'; }, 2200); };
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(done2, done2); else done2();
+  }
+  function again(){
+    try { localStorage.removeItem(STORE); } catch(e){}
+    form.reset(); [form.name, form.email, form.phone].forEach(function(i){ setErr(i, ''); });
+    var btn = form.querySelector('[type=submit]'); btn.disabled = false; btn.firstChild.nodeValue = 'Reserve My Spot';
+    done.hidden = true; form.hidden = false; progress();
+    dlg.querySelector('.top h2').innerHTML = 'Save your <em>spot</em>';
+    form.name.focus();
+  }
   function ics(){
     var e = new Date(start.getTime() + EVENT.minutes * 60000);
     function z(t){ return t.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''); }
