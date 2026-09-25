@@ -170,7 +170,7 @@ a{color:inherit}
 .player .cap b{display:block;font:500 20px/1.2 var(--serif)}
 .player .cap small{display:block;margin-top:4px;font:500 13px/1.3 var(--sans);color:rgba(255,255,255,.8)}
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.date-card{position:absolute;left:-58px;top:56px;z-index:2;display:flex;align-items:center;gap:16px;padding:14px 20px 14px 14px;border-radius:20px;background:#fff;box-shadow:inset 0 0 0 1px rgba(18,19,39,.06),0 24px 50px -22px rgba(18,19,39,.45);transform:rotate(-2.5deg);transition:opacity .4s var(--ease)}
+.date-card{position:absolute;left:-64px;bottom:-26px;z-index:2;display:flex;align-items:center;gap:16px;padding:14px 20px 14px 14px;border-radius:20px;background:#fff;box-shadow:inset 0 0 0 1px rgba(18,19,39,.06),0 24px 50px -22px rgba(18,19,39,.45);transform:rotate(-2.5deg);transition:opacity .4s var(--ease)}
 .player.is-playing ~ .date-card{opacity:0;pointer-events:none}
 .date-card .cal{width:58px;border-radius:12px;overflow:hidden;text-align:center;box-shadow:inset 0 0 0 1px var(--line)}
 .date-card .cal span{display:block;background:var(--navy);color:#fff;font:600 11px/1 var(--sans);letter-spacing:.14em;padding:6px 0 5px}
@@ -361,7 +361,7 @@ a{color:inherit}
   .hero-grid{grid-template-columns:minmax(0,1fr);gap:56px}
   .h1{font-size:min(60px,10.4cqw)}
   .stage{width:min(76%,330px)}
-  .date-card{left:-30px;top:40px}
+  .date-card{left:-30px;bottom:-22px}
   .reframe,.learn,.host,.qual{padding:84px 0}
   .close{padding-top:88px}
   .rf-grid,.host-grid,.learn-head{grid-template-columns:minmax(0,1fr)}
@@ -378,6 +378,7 @@ a{color:inherit}
   .announce{font-size:12.5px}
   .announce .wrap{flex-wrap:nowrap;white-space:nowrap;justify-content:flex-start;overflow:hidden}
   .announce .it{padding:0 10px}
+  .announce .it b{font-size:12.5px}
   .announce .it:first-child{padding-left:0}
   .announce .opt{display:none}
   .island{padding:6px 6px 6px 16px;gap:10px}
@@ -391,7 +392,7 @@ a{color:inherit}
   .when-line > div{padding:14px 0;border-bottom:1px solid var(--line)}
   .when-line > div + div{padding-left:0;border-left:0}
   .hero-cta .btn{width:100%;justify-content:space-between}
-  .date-card{left:-18px;top:26px;padding:10px 14px 10px 10px;gap:12px}
+  .date-card{left:-14px;bottom:-20px;padding:10px 14px 10px 10px;gap:12px}
   .date-card .cal{width:48px}
   .date-card .cal b{font-size:23px}
   .date-card .t b{font-size:14px}
@@ -423,6 +424,90 @@ a{color:inherit}
   .sheet form,.sheet .done{padding:22px 22px calc(24px + env(safe-area-inset-bottom))}
 }
 @media (max-width:420px){.announce [data-countdown]{display:none!important}}
+.m-only{display:none}
+@media (max-width:600px){.d-only{display:none}.m-only{display:inline}}
+
+/* =====================================================================
+   VIDEO PREVIEW: muted loop + an obvious play button
+   ===================================================================== */
+.player .preview{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+@media (hover:hover){.player:hover .preview{transform:scale(1.03)}}
+.player .veil{background:linear-gradient(180deg,rgba(12,13,28,.28) 0%,rgba(12,13,28,0) 22%,rgba(12,13,28,0) 48%,rgba(12,13,28,.82) 100%)}
+.muted-chip{position:absolute;left:14px;top:14px;z-index:2;display:inline-flex;align-items:center;gap:7px;padding:7px 11px 7px 9px;border-radius:999px;background:rgba(12,13,28,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:600 11.5px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#fff;pointer-events:none}
+.muted-chip svg{width:14px;height:14px}
+.bigplay{position:absolute;left:50%;top:60%;width:92px;height:92px;margin:-46px 0 0 -46px;border-radius:50%;display:grid;place-items:center;background:var(--teal);color:var(--navy);box-shadow:0 20px 44px -12px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .6s var(--ease)}
+.bigplay svg{width:30px;height:30px;margin-left:5px}
+.bigplay::before,.bigplay::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:2px solid rgba(255,255,255,.75);animation:ripple 2.6s var(--ease-out) infinite}
+.bigplay::after{animation-delay:1.3s}
+@keyframes ripple{0%{transform:scale(.82);opacity:.9}100%{transform:scale(1.45);opacity:0}}
+.bigplay-label{position:absolute;left:0;right:0;top:calc(60% + 62px);text-align:center;font:600 14px/1 var(--sans);color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+@media (hover:hover){.player .play:hover .bigplay{transform:scale(1.07)}}
+.player .cap{margin-bottom:0;align-self:flex-end;text-align:right}
+.player .play{padding-bottom:26px}
+.stage{margin-bottom:26px}
+
+/* =====================================================================
+   HALLOWEEN LAYER (seasonal: orange appears only on the pumpkin, the spider's eyes and the moonlit bats)
+   ===================================================================== */
+.pumpkin{display:inline-block;width:18px;height:18px;flex:none}
+.pumpkin svg{width:100%;height:100%;display:block}
+.web{position:absolute;pointer-events:none;color:rgba(18,19,39,.16)}
+.web svg{width:100%;height:auto;display:block}
+.hero .web{top:0;right:0;width:clamp(170px,22vw,320px);z-index:0}
+.hero .wrap{position:relative;z-index:1}
+.learn .web{top:0;left:0;width:clamp(150px,18vw,260px);color:rgba(255,255,255,.07);transform:scaleX(-1)}
+.spider{position:absolute;right:-40px;top:30px;z-index:4;width:58px;transform-origin:50% -1200px}
+.spider .drop{position:relative;display:block;transform:translateY(-560px);transition:transform .8s var(--ease)}
+.spider .thread{position:absolute;left:50%;bottom:calc(100% - 22px);width:1px;height:1400px;background:linear-gradient(to top,rgba(18,19,39,.55),rgba(18,19,39,.12) 60%,rgba(18,19,39,0));transform:translateX(-.5px)}
+.spider button{position:relative;display:block;width:58px;height:62px;padding:0;border:0;background:none;color:var(--navy);cursor:pointer}
+.spider button svg{width:58px;height:auto;display:block;filter:drop-shadow(0 6px 6px rgba(18,19,39,.25))}
+.fonts-in .spider .drop{animation:spiderDrop 1.7s cubic-bezier(.2,.8,.2,1) 1.1s both}
+.fonts-in .spider{animation:spiderSway 2.4s ease-in-out 2.8s 3 both}
+@keyframes spiderDrop{0%{transform:translateY(-560px)}62%{transform:translateY(16px)}78%{transform:translateY(-8px)}90%{transform:translateY(3px)}100%{transform:translateY(0)}}
+@keyframes spiderSway{0%,100%{transform:rotate(0)}25%{transform:rotate(.55deg)}75%{transform:rotate(-.55deg)}}
+@media (hover:hover){.spider.is-rested:hover .drop{transform:translateY(-64px)}}
+.spider.is-rested .drop{animation:none;transform:translateY(0)}
+.spider.is-fleeing .drop{transform:translateY(-620px)!important;transition:transform 1.1s cubic-bezier(.5,0,.75,0)}
+.date-card .pk{position:absolute;right:-16px;top:-18px;width:40px;height:40px;transform:rotate(14deg);filter:drop-shadow(0 8px 10px rgba(18,19,39,.25))}
+.date-card .pk svg{width:100%;height:100%}
+.moon{position:absolute;right:3.5%;top:40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#fffaf0 0%,#f1e2c4 48%,#d8c49e 80%);box-shadow:0 0 90px 24px rgba(241,226,196,.14),0 0 0 1px rgba(255,255,255,.06);opacity:.92;pointer-events:none}
+.moon i{position:absolute;border-radius:50%;background:rgba(150,128,90,.18)}
+.bats{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bat{position:absolute;left:0;top:0;width:54px;color:#05060f;opacity:0;filter:drop-shadow(0 0 10px rgba(241,226,196,.35)) drop-shadow(0 0 2px rgba(241,226,196,.5))}
+.bat svg{display:block;width:100%;height:auto;animation:flap .22s ease-in-out infinite alternate;transform-origin:50% 40%}
+@keyframes flap{to{transform:scaleY(.45)}}
+.close.bats-go .bat{animation:batFly var(--t,8s) cubic-bezier(.45,.05,.55,.95) var(--dl,0s) 1 both}
+@keyframes batFly{
+  0%{opacity:0;transform:translate(var(--x0),var(--y0)) scale(var(--s,1))}
+  8%{opacity:1}
+  30%{transform:translate(calc(var(--x0) + 30vw),calc(var(--y0) - 40px)) scale(var(--s,1))}
+  60%{transform:translate(calc(var(--x0) + 62vw),calc(var(--y0) + 10px)) scale(var(--s,1))}
+  92%{opacity:1}
+  100%{opacity:0;transform:translate(calc(var(--x0) + 105vw),calc(var(--y0) - 70px)) scale(var(--s,1))}}
+.close .wrap{position:relative;z-index:2}
+.done .ok.pk-ok{background:#fff3e6;box-shadow:inset 0 0 0 1px rgba(226,129,49,.35)}
+.done .ok.pk-ok svg{width:34px;height:34px}
+@media (max-width:1180px){.moon{width:118px;height:118px;top:18px;right:2.5%}}
+@media (max-width:900px){
+  .spider .thread{height:240px;background:linear-gradient(to top,rgba(18,19,39,.55),rgba(18,19,39,0))}
+  .moon{width:120px;height:120px;right:6%;top:40px}
+}
+@media (max-width:600px){
+  .spider{right:-30px;top:18px;width:44px}
+  .spider button,.spider button svg{width:44px}
+  .spider button{height:48px}
+  .bigplay{width:76px;height:76px;margin:-38px 0 0 -38px}
+  .bigplay svg{width:26px;height:26px}
+  .bigplay-label{top:calc(60% + 52px);font-size:13px}
+  .moon{width:92px;height:92px;top:28px;right:5%}
+  .bat{width:40px}
+}
+@media (prefers-reduced-motion:reduce){
+  .spider .drop{transform:none}
+  .bigplay::before,.bigplay::after{display:none}
+  .bat{display:none}
+}
+
 /* Playfair defaults to old-style figures ("2oK"); the font shorthand resets this, so restate it last */
 .h1,.h1 *,.h2,.h2 *,.wordmark b,.wordmark b *,.li .n,.li h3,.stat .v,.date-card b,.sheet h2,.sheet h2 *,.done h3,.done h3 *,.print .quote p,.player .cap b,.host-copy .sub,.qcol h3,.portrait .press b{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
 .lede,.qual-head .lede{text-wrap:pretty}
@@ -452,8 +537,8 @@ a{color:inherit}
 <!-- ANNOUNCEMENT -->
 <div class="announce" role="region" aria-label="Event details">
   <div class="wrap">
-    <span class="it"><i class="dot" aria-hidden="true"></i><b>Free Live Training</b></span>
-    <span class="it" data-date-medium>Saturday, October 31</span>
+    <span class="it"><span class="pumpkin" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fill="none" stroke="#4d5a26" stroke-width="3" stroke-linecap="round"/><ellipse cx="14.5" cy="28" rx="10" ry="14" fill="#c9661d"/><ellipse cx="33.5" cy="28" rx="10" ry="14" fill="#c9661d"/><ellipse cx="24" cy="28" rx="11" ry="15" fill="#e28131"/><ellipse cx="19" cy="28" rx="5.5" ry="14" fill="none" stroke="#c9661d" stroke-width="1.2" opacity=".7"/><ellipse cx="29" cy="28" rx="5.5" ry="14" fill="none" stroke="#c9661d" stroke-width="1.2" opacity=".7"/><g fill="#ffd36b"><path d="M13.5 24.5 18 20l2 5.5z"/><path d="M34.5 24.5 30 20l-2 5.5z"/><path d="M22.2 28.6 24 25.8l1.8 2.8z"/><path d="M12.8 31.5c3.3 4.6 8 6.8 11.2 6.8s7.9-2.2 11.2-6.8l-3.4 1.4-1.3 2.4-2.3-1.6-2.1 2.3-2.1-2.3-2.3 1.6-1.3-2.4z"/></g></svg></span><b><span class="d-only">Free </span>Halloween Morning Training</b></span>
+    <span class="it"><span class="d-only" data-date-medium>Saturday, October 31</span><span class="m-only" data-date-short>Sat, Oct 31</span></span>
     <span class="it opt">7:30 AM Pacific / 10:30 AM Eastern</span>
     <span class="it" data-countdown hidden></span>
   </div>
@@ -476,6 +561,7 @@ a{color:inherit}
 
 <!-- HERO -->
 <section class="hero" aria-labelledby="h1">
+  <div class="web" aria-hidden="true"><svg viewBox="0 0 260 260" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M258 2L228.3 258.1"/><path d="M258 2L166.8 242.7"/><path d="M258 2L110.9 213.0"/><path d="M258 2L63.8 170.6"/><path d="M258 2L28.3 118.0"/><path d="M258 2L6.7 58.5"/><path d="M255.1 39.7Q251.3 34.9 246.2 35.8Q243.1 31.8 236.4 33.7Q235.9 26.8 230.4 25.7Q230.2 20.1 223.6 18.5Q226.2 12.3 222.2 8.7"/><path d="M250.9 74.3Q243.0 68.1 231.2 75.0Q227.0 62.0 216.2 62.6Q213.0 52.2 200.0 52.2Q201.8 39.3 192.6 34.3Q194.0 24.0 184.0 17.5"/><path d="M244.9 122.7Q233.9 104.8 217.9 109.8Q209.3 95.4 189.8 100.3Q187.7 80.3 172.2 76.4Q170.5 60.4 153.1 54.5Q158.5 36.9 147.8 25.9"/><path d="M239.9 163.4Q223.4 146.7 198.6 160.0Q189.0 133.5 166.5 133.5Q158.8 112.4 133.2 110.2Q134.6 84.5 116.3 73.2Q117.9 51.7 91.4 38.9"/><path d="M232.7 222.7Q212.1 192.1 183.5 199.2Q167.0 174.8 133.8 180.2Q127.5 147.1 100.6 138.6Q95.9 110.7 58.1 102.9Q73.9 67.7 49.9 48.5"/></svg></div>
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-copy">
@@ -501,15 +587,18 @@ a{color:inherit}
       <div class="stage rv" style="--d:3">
         <div class="player" id="player">
           <div class="core">
-            <img class="poster" src="assets/poster-jeff.jpg" alt="Dr. Jeff Finnigan recording his invitation outdoors" width="720" height="1280">
+            <video class="preview" src="assets/jeff-preview.mp4" poster="assets/preview-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
             <div class="veil" aria-hidden="true"></div>
-            <button class="play" type="button" data-play aria-label="Play Dr. Jeff's 1 minute 18 second invitation">
-              <span class="cap"><b>A message from Dr. Jeff</b><small>Sound on</small></span>
-              <span class="pbtn" aria-hidden="true"><i><svg><use href="#i-play"/></svg></i>Watch the Invitation <small>1:18</small></span>
+            <span class="muted-chip" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5h3l4-3.5v12l-4-3.5h-3z"/><path d="m13.5 7.5 4 5m0-5-4 5"/></svg>Preview</span>
+            <button class="play" type="button" data-play aria-label="Play Dr. Jeff's 1 minute 18 second invitation with sound">
+              <span class="bigplay" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
+              <span class="bigplay-label" aria-hidden="true">Watch with sound (1:18)</span>
             </button>
           </div>
         </div>
+        <div class="spider" aria-hidden="true"><span class="drop"><span class="thread"></span><button type="button" tabindex="-1" data-spider><svg viewBox="0 0 60 64"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M25 25L17 12L6 17"/><path d="M24 29L13 21L2 28"/><path d="M24 34L13 36L5 47"/><path d="M25 38L18 47L14 58"/><path d="M35 25L43 12L54 17"/><path d="M36 29L47 21L58 28"/><path d="M36 34L47 36L55 47"/><path d="M35 38L42 47L46 58"/></g><g fill="currentColor"><ellipse cx="30" cy="38.5" rx="9" ry="11.5"/><circle cx="30" cy="23" r="6"/></g><g fill="#e28131"><circle cx="27.8" cy="22.2" r="1.25"/><circle cx="32.2" cy="22.2" r="1.25"/></g><path d="M30 32v13M26 37.5l4 2.4 4-2.4" stroke="rgba(226,129,49,.35)" stroke-width="1.1" fill="none" stroke-linecap="round"/></svg></button></span></div>
         <div class="date-card" aria-hidden="true">
+          <span class="pk"><svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fill="none" stroke="#4d5a26" stroke-width="3" stroke-linecap="round"/><ellipse cx="14.5" cy="28" rx="10" ry="14" fill="#c9661d"/><ellipse cx="33.5" cy="28" rx="10" ry="14" fill="#c9661d"/><ellipse cx="24" cy="28" rx="11" ry="15" fill="#e28131"/><ellipse cx="19" cy="28" rx="5.5" ry="14" fill="none" stroke="#c9661d" stroke-width="1.2" opacity=".7"/><ellipse cx="29" cy="28" rx="5.5" ry="14" fill="none" stroke="#c9661d" stroke-width="1.2" opacity=".7"/><g fill="#ffd36b"><path d="M13.5 24.5 18 20l2 5.5z"/><path d="M34.5 24.5 30 20l-2 5.5z"/><path d="M22.2 28.6 24 25.8l1.8 2.8z"/><path d="M12.8 31.5c3.3 4.6 8 6.8 11.2 6.8s7.9-2.2 11.2-6.8l-3.4 1.4-1.3 2.4-2.3-1.6-2.1 2.3-2.1-2.3-2.3 1.6-1.3-2.4z"/></g></svg></span>
           <div class="cal"><span>OCT</span><b data-day>31</b></div>
           <div class="t"><b>Halloween Morning</b><span>7:30 AM PT / 10:30 AM ET</span></div>
         </div>
@@ -561,6 +650,7 @@ a{color:inherit}
 
 <!-- WHAT YOU'LL LEARN -->
 <section class="learn on-navy" aria-labelledby="learn-h">
+  <div class="web" aria-hidden="true"><svg viewBox="0 0 260 260" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M258 2L228.3 258.1"/><path d="M258 2L166.8 242.7"/><path d="M258 2L110.9 213.0"/><path d="M258 2L63.8 170.6"/><path d="M258 2L28.3 118.0"/><path d="M258 2L6.7 58.5"/><path d="M255.1 39.7Q251.3 34.9 246.2 35.8Q243.1 31.8 236.4 33.7Q235.9 26.8 230.4 25.7Q230.2 20.1 223.6 18.5Q226.2 12.3 222.2 8.7"/><path d="M250.9 74.3Q243.0 68.1 231.2 75.0Q227.0 62.0 216.2 62.6Q213.0 52.2 200.0 52.2Q201.8 39.3 192.6 34.3Q194.0 24.0 184.0 17.5"/><path d="M244.9 122.7Q233.9 104.8 217.9 109.8Q209.3 95.4 189.8 100.3Q187.7 80.3 172.2 76.4Q170.5 60.4 153.1 54.5Q158.5 36.9 147.8 25.9"/><path d="M239.9 163.4Q223.4 146.7 198.6 160.0Q189.0 133.5 166.5 133.5Q158.8 112.4 133.2 110.2Q134.6 84.5 116.3 73.2Q117.9 51.7 91.4 38.9"/><path d="M232.7 222.7Q212.1 192.1 183.5 199.2Q167.0 174.8 133.8 180.2Q127.5 147.1 100.6 138.6Q95.9 110.7 58.1 102.9Q73.9 67.7 49.9 48.5"/></svg></div>
   <div class="wrap">
     <div class="learn-head">
       <div>
@@ -639,6 +729,8 @@ a{color:inherit}
 
 <!-- CLOSING -->
 <section class="close on-navy" aria-labelledby="close-h">
+  <div class="moon" aria-hidden="true"><i style="left:30%;top:52%;width:18%;height:18%"></i><i style="left:58%;top:30%;width:12%;height:12%"></i><i style="left:52%;top:64%;width:9%;height:9%"></i></div>
+  <div class="bats" aria-hidden="true"><span class="bat" style="--x0:-8vw;--y0:170px;--s:1;--t:8.5s;--dl:0s"><svg viewBox="0 0 64 30"><path fill="currentColor" d="M32 9c1.2-2.2 2.1-4.2 2.3-6.5.9 1.6 1.4 3 1.5 4.6C40 5.6 46 3.9 53 4.5c-3 2-4.6 4.2-4.2 7.2 3.8-1.4 7.4-1.2 11.2.9-3.9.7-6.9 2.9-8.4 6.4-2.8-2.1-6.1-2.6-9.4-1.3-2.4 1-4 3.4-4.7 7.4-1.4-2.4-3-3.6-5.5-3.6s-4.1 1.2-5.5 3.6c-.7-4-2.3-6.4-4.7-7.4-3.3-1.3-6.6-.8-9.4 1.3-1.5-3.5-4.5-5.7-8.4-6.4 3.8-2.1 7.4-2.3 11.2-.9.4-3-1.2-5.2-4.2-7.2 7-.6 13 1.1 17.2 2.6.1-1.6.6-3 1.5-4.6.2 2.3 1.1 4.3 2.3 6.5z"/></svg></span><span class="bat" style="--x0:-14vw;--y0:110px;--s:0.7;--t:9.5s;--dl:0.9s"><svg viewBox="0 0 64 30"><path fill="currentColor" d="M32 9c1.2-2.2 2.1-4.2 2.3-6.5.9 1.6 1.4 3 1.5 4.6C40 5.6 46 3.9 53 4.5c-3 2-4.6 4.2-4.2 7.2 3.8-1.4 7.4-1.2 11.2.9-3.9.7-6.9 2.9-8.4 6.4-2.8-2.1-6.1-2.6-9.4-1.3-2.4 1-4 3.4-4.7 7.4-1.4-2.4-3-3.6-5.5-3.6s-4.1 1.2-5.5 3.6c-.7-4-2.3-6.4-4.7-7.4-3.3-1.3-6.6-.8-9.4 1.3-1.5-3.5-4.5-5.7-8.4-6.4 3.8-2.1 7.4-2.3 11.2-.9.4-3-1.2-5.2-4.2-7.2 7-.6 13 1.1 17.2 2.6.1-1.6.6-3 1.5-4.6.2 2.3 1.1 4.3 2.3 6.5z"/></svg></span><span class="bat" style="--x0:-10vw;--y0:230px;--s:0.55;--t:10.5s;--dl:1.8s"><svg viewBox="0 0 64 30"><path fill="currentColor" d="M32 9c1.2-2.2 2.1-4.2 2.3-6.5.9 1.6 1.4 3 1.5 4.6C40 5.6 46 3.9 53 4.5c-3 2-4.6 4.2-4.2 7.2 3.8-1.4 7.4-1.2 11.2.9-3.9.7-6.9 2.9-8.4 6.4-2.8-2.1-6.1-2.6-9.4-1.3-2.4 1-4 3.4-4.7 7.4-1.4-2.4-3-3.6-5.5-3.6s-4.1 1.2-5.5 3.6c-.7-4-2.3-6.4-4.7-7.4-3.3-1.3-6.6-.8-9.4 1.3-1.5-3.5-4.5-5.7-8.4-6.4 3.8-2.1 7.4-2.3 11.2-.9.4-3-1.2-5.2-4.2-7.2 7-.6 13 1.1 17.2 2.6.1-1.6.6-3 1.5-4.6.2 2.3 1.1 4.3 2.3 6.5z"/></svg></span></div>
   <div class="wrap">
     <h2 class="h2 rv" id="close-h">Ready to build your $20K Day? <em>See you Halloween morning.</em></h2>
     <p class="lede rv" style="--d:1">Forty minutes on Zoom, no charge and no pressure. Once the 40 seats are gone, registration closes.</p>
@@ -713,6 +805,7 @@ var EVENT = {
 };
 var FORM_ENDPOINT = '';   // GHL webhook or form URL. Empty = preview mode, nothing is sent.
 var VIMEO = { id: '1226772677', h: '23d58c2a67' };
+var PUMPKIN = '<svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fill="none" stroke="#4d5a26" stroke-width="3" stroke-linecap="round"/><ellipse cx="14.5" cy="28" rx="10" ry="14" fill="#c9661d"/><ellipse cx="33.5" cy="28" rx="10" ry="14" fill="#c9661d"/><ellipse cx="24" cy="28" rx="11" ry="15" fill="#e28131"/><ellipse cx="19" cy="28" rx="5.5" ry="14" fill="none" stroke="#c9661d" stroke-width="1.2" opacity=".7"/><ellipse cx="29" cy="28" rx="5.5" ry="14" fill="none" stroke="#c9661d" stroke-width="1.2" opacity=".7"/><g fill="#ffd36b"><path d="M13.5 24.5 18 20l2 5.5z"/><path d="M34.5 24.5 30 20l-2 5.5z"/><path d="M22.2 28.6 24 25.8l1.8 2.8z"/><path d="M12.8 31.5c3.3 4.6 8 6.8 11.2 6.8s7.9-2.2 11.2-6.8l-3.4 1.4-1.3 2.4-2.3-1.6-2.1 2.3-2.1-2.3-2.3 1.6-1.3-2.4z"/></g></svg>';
 
 (function(){
   'use strict';
@@ -732,13 +825,15 @@ var VIMEO = { id: '1226772677', h: '23d58c2a67' };
   document.querySelectorAll('[data-year]').forEach(function(n){ n.textContent = String(d.getFullYear()); });
   (function(){
     var el = document.querySelector('[data-countdown]'); if (!el) return;
-    var now = new Date(); now.setHours(12,0,0,0);
-    var diff = Math.round((d - now) / 864e5);
-    if (diff > 1) el.textContent = diff + ' days away';
-    else if (diff === 1) el.textContent = 'Tomorrow';
-    else if (diff === 0) el.textContent = 'Today';
-    else return;
-    el.hidden = false;
+    function tick(){
+      var ms = start - new Date();
+      if (ms <= -EVENT.minutes * 60000) { el.hidden = true; return; }
+      if (ms <= 0) { el.textContent = 'Live now'; el.hidden = false; return; }
+      var dd = Math.floor(ms / 864e5), hh = Math.floor(ms % 864e5 / 36e5), mm = Math.floor(ms % 36e5 / 6e4);
+      el.textContent = 'Starts in ' + (dd ? dd + 'd ' : '') + hh + 'h ' + mm + 'm';
+      el.hidden = false;
+    }
+    tick(); setInterval(tick, 30000);
   })();
   /* the visitor's own time, only when they are not on Pacific or Eastern */
   (function(){
@@ -798,16 +893,37 @@ var VIMEO = { id: '1226772677', h: '23d58c2a67' };
   function closeLb(){
     lb.classList.remove('is-open'); document.body.style.overflow = '';
     setTimeout(function(){ lbFrame.innerHTML = ''; lb.hidden = true; }, 380);
+    var pv = document.querySelector('.player .preview'); if (pv && !reduce) { var q = pv.play(); if (q && q.catch) q.catch(function(){}); }
     if (lastFocus) lastFocus.focus();
   }
+  var preview = document.querySelector('.player .preview');
+  var saveData = navigator.connection && navigator.connection.saveData;
+  if (preview && (reduce || saveData)) { preview.removeAttribute('autoplay'); preview.pause(); preview.preload = 'none'; }
+  if (preview && !reduce && !saveData) { var pp = preview.play(); if (pp && pp.catch) pp.catch(function(){}); }
   document.querySelector('[data-play]').addEventListener('click', function(){
-    if (window.matchMedia('(max-width:600px)').matches) { openLb(); return; }
+    if (window.matchMedia('(max-width:600px)').matches) { if (preview) preview.pause(); openLb(); return; }
     var player = document.getElementById('player');
     var core = player.querySelector('.core');
     core.innerHTML = ''; core.appendChild(iframe());
     player.classList.add('is-playing');
   });
   lb.addEventListener('click', function(e){ if (e.target === lb || e.target.closest('[data-close]')) closeLb(); });
+
+  /* ---------- spider: drops in, sways, climbs away when poked ---------- */
+  var spider = document.querySelector('.spider');
+  if (spider) {
+    setTimeout(function(){ spider.classList.add('is-rested'); }, reduce ? 0 : 10500);
+    spider.querySelector('[data-spider]').addEventListener('click', function(){
+      spider.classList.add('is-rested','is-fleeing');
+      setTimeout(function(){ spider.classList.remove('is-fleeing'); }, 2600);
+    });
+  }
+  /* ---------- bats cross the moon once, when the closing comes into view ---------- */
+  var closeSec = document.querySelector('.close');
+  if (closeSec && !reduce && 'IntersectionObserver' in window) {
+    var bio = new IntersectionObserver(function(es){ if (es[0].isIntersecting) { closeSec.classList.add('bats-go'); bio.disconnect(); } }, { threshold:.35 });
+    bio.observe(closeSec);
+  }
 
   /* ---------- registration dialog ---------- */
   var dlg = document.getElementById('dlg');
@@ -913,9 +1029,9 @@ var VIMEO = { id: '1226772677', h: '23d58c2a67' };
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
   function success(p, preview){
     done.innerHTML =
-      '<span class="ok" aria-hidden="true"><svg><use href="#i-check"/></svg></span>' +
+      '<span class="ok pk-ok" aria-hidden="true">' + PUMPKIN + '</span>' +
       '<h3>You’re in, <em>' + esc(p.first_name) + '.</em></h3>' +
-      '<p>Your Zoom link is on its way to your inbox. See you ' + esc(medium) + ' at 7:30 AM Pacific / 10:30 AM Eastern.</p>' +
+      '<p>Your Zoom link is on its way to your inbox. See you Halloween morning, ' + esc(medium) + ' at 7:30 AM Pacific / 10:30 AM Eastern.</p>' +
       '<div class="echo">' +
         '<div><span>Name</span><b>' + esc(p.full_name) + '</b></div>' +
         '<div><span>Email</span><b>' + esc(p.email) + '</b></div>' +
