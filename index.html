@@ -876,6 +876,7 @@ var EVENT = {
 };
 var FORM_ENDPOINT = 'https://services.leadconnectorhq.com/hooks/TxpqBRWLfyNdw7GglVNI/webhook-trigger/8e5ed83c-152f-4ba5-afa3-a4ec58ddee45';
 // GHL inbound webhook. Set to '' for preview mode (nothing is sent). Add ?preview=1 to the URL to test without sending.
+var THANK_YOU_URL = '';  // e.g. 'https://yourdomain.com/20kday-thank-you'. Set = redirect there after a confirmed sign-up (first name passed along). Empty = show the confirmation in the popup.
 var VIMEO = { id: '1226772677', h: '23d58c2a67' };
 var PUMPKIN = '<svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fill="none" stroke="#4d5a26" stroke-width="3" stroke-linecap="round"/><ellipse cx="14.5" cy="28" rx="10" ry="14" fill="#c9661d"/><ellipse cx="33.5" cy="28" rx="10" ry="14" fill="#c9661d"/><ellipse cx="24" cy="28" rx="11" ry="15" fill="#e28131"/><ellipse cx="19" cy="28" rx="5.5" ry="14" fill="none" stroke="#c9661d" stroke-width="1.2" opacity=".7"/><ellipse cx="29" cy="28" rx="5.5" ry="14" fill="none" stroke="#c9661d" stroke-width="1.2" opacity=".7"/><g fill="#ffd36b"><path d="M13.5 24.5 18 20l2 5.5z"/><path d="M34.5 24.5 30 20l-2 5.5z"/><path d="M22.2 28.6 24 25.8l1.8 2.8z"/><path d="M12.8 31.5c3.3 4.6 8 6.8 11.2 6.8s7.9-2.2 11.2-6.8l-3.4 1.4-1.3 2.4-2.3-1.6-2.1 2.3-2.1-2.3-2.3 1.6-1.3-2.4z"/></g></svg>';
 
@@ -1146,6 +1147,7 @@ var PUMPKIN = '<svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fi
     done.querySelector('[data-share]').addEventListener('click', share);
     done.querySelector('[data-again]').addEventListener('click', again);
     if (!returning) { done.style.outline = 'none'; done.focus({ preventScroll:true }); }
+    if (!returning && THANK_YOU_URL) { setTimeout(function(){ location.href = THANK_YOU_URL + (THANK_YOU_URL.indexOf('?') > -1 ? '&' : '?') + 'first_name=' + encodeURIComponent(p.first_name || ''); }, 700); }
   }
 
   function gcalUrl(){
