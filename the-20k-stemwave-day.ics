@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//20K Day//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20kday-2026-10-31@20kday.com
+DTSTAMP:20260928T150456Z
+DTSTART:20261031T143000Z
+DTEND:20261031T151000Z
+SUMMARY:The $20K StemWave Day
+DESCRIPTION:Free 40-minute live training for StemWave providers with Dr. J
+ eff Finnigan. Your Zoom link is in your confirmation email.
+LOCATION:Zoom (link in your confirmation email)
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:The $20K StemWave Day starts in 30 minutes
+END:VALARM
+END:VEVENT
+END:VCALENDAR

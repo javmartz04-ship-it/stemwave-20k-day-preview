@@ -1150,12 +1150,6 @@ var PUMPKIN = '<svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fi
     if (!returning && THANK_YOU_URL) { setTimeout(function(){ location.href = THANK_YOU_URL + (THANK_YOU_URL.indexOf('?') > -1 ? '&' : '?') + 'first_name=' + encodeURIComponent(p.first_name || ''); }, 700); }
   }
 
-  function gcalUrl(){
-    var e = new Date(start.getTime() + EVENT.minutes * 60000);
-    function z(t){ return t.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''); }
-    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent("Let's Build a $20K StemWave Day (Dr. Jeff Finnigan)") +
-      '&dates=' + z(start) + '/' + z(e) + '&details=' + encodeURIComponent('Free 40-minute live training on Zoom. Your Zoom link is in your confirmation email.');
-  }
   function share(ev){
     var url = location.href.split(/[?#]/)[0];
     var b = ev.currentTarget;
@@ -1172,18 +1166,35 @@ var PUMPKIN = '<svg viewBox="0 0 48 48"><path d="M24 11c-1.2-3.5.2-6.6 3.6-8" fi
     dlg.querySelector('.top h2').innerHTML = 'Save your <em>spot</em>';
     form.name.focus();
   }
+  /* ---------- calendar: "The $20K StemWave Day" ---------- */
+  var CAL_TITLE = 'The $20K StemWave Day';
+  var ICS_URL = 'https://javmartz04-ship-it.github.io/stemwave-20k-day-preview/the-20k-stemwave-day.ics';  /* hosted copy for iPhone; regenerate with tools/make-ics.py if the event changes */
+  var CAL_DETAILS = 'Free 40-minute live training for StemWave providers with Dr. Jeff Finnigan. Your Zoom link is in your confirmation email.';
+  var CAL_LOCATION = 'Zoom (link in your confirmation email)';
+  function calZ(t){ return t.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''); }
+  function calEnd(){ return new Date(start.getTime() + EVENT.minutes * 60000); }
+  function icsText(s){ return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); }
+  function gcalUrl(){
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(CAL_TITLE) +
+      '&dates=' + calZ(start) + '/' + calZ(calEnd()) + '&details=' + encodeURIComponent(CAL_DETAILS) + '&location=' + encodeURIComponent(CAL_LOCATION);
+  }
+  /* RFC 5545: fold lines longer than 75 octets (continuation lines start with a space) */
+  function calFold(line){ var out = ''; while (line.length > 74) { out += line.slice(0, 74) + '\r\n '; line = line.slice(74); } return out + line; }
+  function icsBody(){
+    return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//20K Day//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
+      'UID:20kday-' + EVENT.date + '@20kday.com','DTSTAMP:' + calZ(new Date()),'DTSTART:' + calZ(start),'DTEND:' + calZ(calEnd()),
+      'SUMMARY:' + icsText(CAL_TITLE),'DESCRIPTION:' + icsText(CAL_DETAILS),'LOCATION:' + icsText(CAL_LOCATION),
+      'BEGIN:VALARM','TRIGGER:-PT30M','ACTION:DISPLAY','DESCRIPTION:' + icsText(CAL_TITLE + ' starts in 30 minutes'),'END:VALARM',
+      'END:VEVENT','END:VCALENDAR'].map(calFold).join('\r\n');
+  }
   function ics(){
-    var e = new Date(start.getTime() + EVENT.minutes * 60000);
-    function z(t){ return t.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''); }
-    var body = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//20K Day//EN','BEGIN:VEVENT',
-      'UID:20kday-' + EVENT.date + '@20kday.com','DTSTAMP:' + z(new Date()),'DTSTART:' + z(start),'DTEND:' + z(e),
-      'SUMMARY:Let\'s Build a $20K StemWave Day (Dr. Jeff Finnigan)',
-      'DESCRIPTION:Free 40-minute live training on Zoom. Your Zoom link is in your confirmation email.',
-      'BEGIN:VALARM','TRIGGER:-PT30M','ACTION:DISPLAY','DESCRIPTION:$20K StemWave Day starts in 30 minutes','END:VALARM',
-      'END:VEVENT','END:VCALENDAR'].join('\r\n');
+    var body = icsBody();
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    /* iPhone/iPad: Safari opens a hosted .ics straight into Calendar's Add sheet; a blob download would land in Files */
+    if (iOS && ICS_URL) { location.href = ICS_URL; return; }
     var a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([body], { type:'text/calendar' }));
-    a.download = '20k-stemwave-day.ics'; document.body.appendChild(a); a.click(); a.remove();
+    a.href = URL.createObjectURL(new Blob([body], { type:'text/calendar;charset=utf-8' }));
+    a.download = 'the-20k-stemwave-day.ics'; document.body.appendChild(a); a.click(); a.remove();
   }
 })();
 </script>
